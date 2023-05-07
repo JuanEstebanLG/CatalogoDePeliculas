@@ -1,0 +1,185 @@
+
+*{
+
+    box-sizing: border-box;
+    padding: 0;
+    margin: 0;
+}
+
+html{
+    font-size: 62.5%;
+}
+
+
+body{
+    font-family: 'Montserrat', sans-serif;
+	background: #e0e0e0;
+    
+	color: #1d1d1d;
+    overflow: auto;
+}
+.contenedor-principal{
+    background-color: #0a0a0a;
+    width: 100%;
+    height: 100%;
+}
+.flex{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: no-wrap;
+}
+
+/* 
+    movie-banner
+    container
+    movie-title
+    movie-video
+*/
+
+.contenedor-principal{
+    display: grid;
+    grid-template-columns: 1fr;
+    grid-template-rows: repeat(4, 1fr);
+    gap: 2rem;
+    width: 100%;
+    height: 100%;
+    
+}
+
+.titulo{    
+    font-family: 'Antonio', sans-serif;
+    font-size: 4rem;
+    text-align: center;
+    width: 100%;
+    color: white;
+    font-weight: bold;
+}
+
+#section_1{
+    grid-column: 1;
+    grid-row: 1;
+    width: 90%;
+    margin: 1rem auto 1rem auto;
+    padding: 1rem;
+    height: 52rem;
+    background-color: #3d3d3d82;
+
+}
+
+#mainView_box_container{
+    justify-content: left;
+    width: 70%;
+    height: 100%;
+    flex-wrap: wrap;
+    margin: 2rem;
+    }
+
+    #title_mainView{
+        text-align: left;
+        color: white;
+        letter-spacing: .1rem;
+    }
+
+    #tagline{
+        font-style: italic;
+        text-align: left;
+        width: 100%;
+        margin: auto;
+        padding-left:2rem;
+        padding-bottom: 2rem;
+        font-size: 1.5rem;
+        color: rgb(237, 52, 52);
+    }
+
+    #rating_mainView{
+        width: 100%;
+        height: 70%;
+        background-color: #6C6C6C;
+        flex-wrap: wrap;
+    }
+
+
+    #rating_mainView h3{
+        color: #f47741;
+        letter-spacing: .2rem;
+    }
+    #rating_mainView span{
+        color: #fce287;
+        padding: 3rem;
+        width: 80%;
+        border-bottom: #464646 .2rem solid;
+    }
+    #rating_mainView span::first-letter{
+        color: #e59211;
+        font-size: 5rem;
+
+    }
+
+    
+
+    #banner_content{
+        width: 100%;
+    }
+
+    #banner_content img{
+        width: 15rem;
+    }
+
+
+
+#mainMedia_box_container{
+    width: 30%;
+    height: 100%;
+    background-color: transparent;
+}
+
+    #movie-banner{
+        width: 80%;
+        height: 100%;
+        margin: 2rem auto 2rem 3.5rem;
+        border-radius: 2rem;
+        transition: all .4s ease;
+    }
+    
+    #movie-banner:hover{
+    transform: scale(1.04);
+    }
+
+
+#section_2{
+    grid-column: 1;
+    grid-row: 2;
+    width: 90%;
+    height: max-content;
+    margin: 1rem auto 1rem auto;
+    padding: 1rem;
+    height: 52rem;
+    background-color: #3d3d3d82;
+}
+
+    #overview_container{
+        width: 50%;
+        height: 100%;
+    }
+
+    #overview{
+        
+        width: 90%;
+        height: 100%;
+        margin: auto 10%;
+        font-size: 3rem;
+        font-weight: 300;
+        font-family: 'Comic Neue', cursive;
+        color: rgb(255, 255, 255);
+    }
+
+    #trailer_container{
+        width: 50%;
+        height: 100%;
+    }
+
+    #trailer_container iframe{
+        width: 100%;
+        height: 100%;
+    }
