@@ -1,7 +1,5 @@
 import { movieDbFetch, url_basic, api_key, language } from "./movideDb.js";
-import { peliculasContainer, request} from "./index.js";
-
-
+import { cargarPeliculas, peliculasContainer, request} from "./index.js";
 
 const poster_url = 'https://image.tmdb.org/t/p/w500/'; // prefix for any img catch from api.
 
@@ -9,6 +7,9 @@ const poster_url = 'https://image.tmdb.org/t/p/w500/'; // prefix for any img cat
  *  This function should change the state of 'peliculasContainer' and pull the movies according to
  * the request that is being executed.
  */
+
+
+
 
 export async function changeState(mode, page, peliculasContainers, section){
 
@@ -20,9 +21,9 @@ export async function changeState(mode, page, peliculasContainers, section){
         let peliculaHtml = indexGen(data);
         peliculasContainers.innerHTML = peliculaHtml;
         return peliculasContainers;
-      } catch (error) {
+    } catch (error) {
         console.log(error);
-      }
+        }
 }
 
 /**
@@ -35,13 +36,13 @@ export function indexGen(data){
     
     let pelicula = '';
     data.results.forEach(peliculas => {
-        pelicula +=
-        `
-            <div class='pelicula'>
-                <img class='poster' src='${poster_url}${peliculas.poster_path}' id='${peliculas.id}'/>
-                <h3 class='titulo'>${peliculas.title}</h3>
-            </div>
-        `;
+            pelicula +=
+            `
+                <div class='pelicula'>
+                    <img class='poster' src='${poster_url}${peliculas.poster_path}' id='${peliculas.id}'/>
+                    <h3 class='titulo'>${peliculas.title}</h3>
+                </div>
+            `;
     });
     return pelicula;
 }
@@ -52,7 +53,6 @@ export function indexGen(data){
 
 export function indexVideo(data){
 
-
     const video = data.results.find( 
         (videos) =>  videos.type == 'Trailer' && videos.official == true
         );
@@ -60,7 +60,6 @@ export function indexVideo(data){
     return videoSrc;
 
 }
-
 
 export function indexDetails(data){
     
@@ -76,21 +75,72 @@ export function indexDetails(data){
 /*
 * this function is active when the user click on a banner movie. transport to another page when de movie info
 */
-export  function openWindowMaker(banner, title, videoSrc, overview, tagline, vote){
-    if(videoSrc){
-    // only can activated if VideoSrc exist.
-        return window.open(`./movie-description.html?banner=${banner.src}&title=${title.innerHTML}&video=${videoSrc}&overview=${overview}&tagline=${tagline}&vote=${vote}`)
-    }else{
-        alert('Esta pelicula no cuenta con trailer ni Media definida para tu lenguaje o idioma, intenta cambiar a otro idioma porfavor')
-        return window.open(`./movie-description.html?banner=${banner.src}&title=${title.innerHTML}&video=${videoSrc}&overview=${overview}&tagline=${tagline}&vote=${vote}`)
+
+export async function openWindowMaker(banner, title, videoSrc, overview, tagline, vote) {
+    if (videoSrc) {
+        return openWindow(`./movie-description.html?banner=${banner.src}&title=${title.innerHTML}&video=${videoSrc}&overview=${overview}&tagline=${tagline}&vote=${vote}`);
+    } else {
+        await makeAndCloseAlert(peliculasContainer, 'This movie is either very old or too new and lacks visual elements');
+        return await openWindow(`./movie-description.html?banner=${banner.src}&title=${title.innerHTML}&video=${videoSrc}&overview=${overview}&tagline=${tagline}&vote=${vote}`);
     }
 }
 
+function openWindow(url) {
+    return new Promise((resolve, reject) => {
+        const newWindow = window.open(url);
+        if (newWindow) {
+        resolve(newWindow);
+        } else {
+        reject(new Error('No se pudo abrir la ventana'));
+        }
+    });
+    }
+
+function makeAndCloseAlert(contenedor, texto){
+
+    // Make alert
+    return new Promise ((resolve) => {
+
+        const new_alert = document.createElement('section');
+
+        const principal_space = document.createElement('div');
+        const text = document.createElement('p');
+        const button = document.createElement('button');
+
+        const button_text = document.createTextNode('ACCEPT AND CONTINUE');
+        const content = document.createTextNode(texto);
+
+        contenedor.appendChild(new_alert)
+        
+        text.appendChild(content);
+        button.appendChild(button_text);
+        principal_space.appendChild(text);
+        principal_space.appendChild(button);
+        new_alert.appendChild(principal_space);
+
+        button.classList.add('button_close_alert')
+        text.classList.add('text_alert');
+        principal_space.classList.add('alert_text_container');
+        new_alert.classList.add('alerta', 'justify_and_aling_style');
+        new_alert.style.display = 'grid';
+        new_alert.style.position='fixed';
+
+
+        const NEW_ALERT_DOM_ELEMENT = document.getElementsByClassName('alerta')[0];
+        const BUTTON_DOM_ELEMENT = document.getElementsByClassName('button_close_alert')[0];
+        
+        BUTTON_DOM_ELEMENT.addEventListener('click', () => {
+            NEW_ALERT_DOM_ELEMENT.remove();
+            resolve();
+        });
+    })
+}
 
 /**
  * This function checks if the response obtained from the api is valid, if it is, it saves everything in a json
  * if not, send an error depending on what happened
  */
+
 export async function Validate(dataFetch){
 
     let response = '';
@@ -99,7 +149,7 @@ export async function Validate(dataFetch){
     }else{
     console.log('Ha ocurrido un problema.')
         if(dataFetch.status == 401){
-            console.log('LLave de ingreso incorrecta')
+            console.log('LLave de ingreso incorrecta');
         }
     }
     return  response;
@@ -109,6 +159,7 @@ export async function Validate(dataFetch){
  * 
  * this function load the movie info, use the openWindowMaker for open other page.
  */
+
 export function loadInner(movieContainers){
 
     movieContainers.forEach((movieContainer) => {
@@ -126,20 +177,31 @@ export function loadInner(movieContainers){
         console.log(data_details);
 
         const videoSrc = indexVideo(data_trailer);
+
         const genreSrc = indexDetails(data_details.genre);
 
         const tag = data_details.tagline
         const overview = data_details.overview;
         const vote = data_details.vote_average;
-
+        const vote_round = round(vote)
         console.log(tag, overview, vote);
 
         const responseReviews =  await request.movieReviewFetch(id)
         const data_reviews = await Validate(responseReviews);
-        openWindowMaker(banner, title, videoSrc, overview, tag, vote);
+        openWindowMaker(banner, title, videoSrc, overview, tag, vote_round);
         })
     });
 }
+
+
+
+
+
+// this function just round a number. 
+function round(number){
+    return parseFloat(number).toFixed(1)
+}
+
 /**
  * this function change the order of movies deppend of a 'section' variable.
  */
@@ -175,3 +237,36 @@ switch(menu){
     
     }
 } 
+
+export async function searchMovie(texto){
+    if(texto  != ''){
+
+        const search_fetch = await request.movieSearchFetch(texto);
+        const data_search = await Validate(search_fetch);
+        let NEW_GENERATION_MOVIES = '';
+        data_search.results.forEach(search =>{
+            if(search.poster_path != null){
+                NEW_GENERATION_MOVIES += 
+                `
+                <div class='pelicula'>
+                    <img class='poster' src='${poster_url}${search.poster_path}' id='${search.id}'/>
+                    <h3 class='titulo'>${search.title}</h3>
+                </div>
+                `
+                return NEW_GENERATION_MOVIES;
+            }
+            
+        
+        })
+        
+        if(NEW_GENERATION_MOVIES != null) {
+            peliculasContainer.innerHTML = NEW_GENERATION_MOVIES;
+            loadInner(peliculasContainer.querySelectorAll('.pelicula'))
+        }
+        
+
+    }else{
+        cargarPeliculas()
+    }    
+
+}

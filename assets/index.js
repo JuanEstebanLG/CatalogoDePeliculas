@@ -3,14 +3,14 @@ let page = 1;
 
 // import elements from modules
 import { movieDbFetch, url_basic, api_key, language } from "./movideDb.js";
-import { changeState, loadInner, EspecificMovieFetch, detectMenu}  from "./functions.js";
+import { changeState, loadInner, EspecificMovieFetch, detectMenu, searchMovie}  from "./functions.js";
 export const request = new movieDbFetch(url_basic,api_key,page,language);
 
 
 // get elements from html and set variables
 
 export let peliculasContainer = document.getElementById('contenedor');
-let searchBar = document.getElementById('search-bar');
+let searchBar = document.querySelector('input');
 let statusItems = 'popular';
 
 // this elements may change the movies order when click over they.
@@ -25,6 +25,7 @@ const btnSiguiente = document.getElementById('btnSiguiente');
 /**
  * Principal Function, print in screen the api info.
  */
+
 export const cargarPeliculas = async () => {
 
   try{
@@ -39,8 +40,10 @@ export const cargarPeliculas = async () => {
       loadInner(peliculasContainer.querySelectorAll('.pelicula'))
     }
 
+    searchBar.addEventListener('input', () => {
+      searchMovie(searchBar.value.toLowerCase())
+    })
     // add event click to all buttons
-    
 
     popular.addEventListener('click', async () =>{
       statusItems = 'popular';
@@ -59,6 +62,9 @@ export const cargarPeliculas = async () => {
       page = 1;
       await EspecificMovieFetch('upcoming', request.movieZoneFetch, peliculasContainer, page)
     });
+
+
+
 
   } catch(error) {
     console.log(error)

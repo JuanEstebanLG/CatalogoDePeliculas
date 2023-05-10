@@ -29,5 +29,9 @@ export class movieDbFetch{
     async movieReviewFetch(movieId){
         return await fetch (`${url_basic}movie/${movieId}/reviews?api_key=${api_key}&language=${language}&page=${1}`)
     }
+
+    async movieSearchFetch(movieName){
+        return await fetch(`${url_basic}search/movie?api_key=${api_key}&language=${language}&query=${movieName}`)
+    }
 }
 

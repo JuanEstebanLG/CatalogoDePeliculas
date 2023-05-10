@@ -1,4 +1,6 @@
 
+
+
 const params = new URLSearchParams(window.location.search);
 const movieBanner = params.get('banner');
 const movieTitle = params.get('title');
@@ -7,7 +9,10 @@ const overview = params.get('overview');
 const tagline =  params.get('tagline');
 const vote =  params.get('vote');
 
+
 const movieContainer = document.getElementById('contenedor-principal');
+
+
 
 movieContainer.innerHTML = `
 <section class = "flex" id="section_1">  
@@ -19,7 +24,9 @@ movieContainer.innerHTML = `
       <h3 class = "titulo">Rating</h3>
       <span class = "titulo">${vote}</span>
       <article class = "flex" id = "banner_content">
-      <img src="./Media/icons8-coin-96.png"/>
+
+      <img src="./Media/icons8-coin-96.png"/ alt="${movieTitle} image principal">
+      
       </article>
     </div>
   </div>
@@ -29,7 +36,7 @@ movieContainer.innerHTML = `
 </section>
 
 <section class = "flex" id="section_2">
-  <div id = "overview_container" class = "flex">
+  <div id = "overview_container" class = "flex scroll-personal">
     <p id="overview">${overview}</p>
   </div>
 
@@ -38,5 +45,8 @@ movieContainer.innerHTML = `
   </div>
 </section>
 `;
+
+
+
 // https://secure.gravatar.com/avatar/992eef352126a53d7e141bf9e8707576.jpg
 
