@@ -2,7 +2,7 @@
 
 export const url_basic = 'https://api.themoviedb.org/3/';
 export const api_key = '7073007d70c81551b5e373ca85df0495';
-export const language = 'en-Us'
+export const language = 'en-US'
 
 
 
@@ -32,6 +32,10 @@ export class movieDbFetch{
 
     async movieSearchFetch(movieName){
         return await fetch(`${url_basic}search/movie?api_key=${api_key}&language=${language}&query=${movieName}`)
+    }
+
+    async movieCastFetch(movieId){
+        return await fetch(`${url_basic}movie/${movieId}/credits?api_key=${api_key}&language=${language}`)
     }
 }
 

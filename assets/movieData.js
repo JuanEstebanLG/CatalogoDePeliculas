@@ -2,17 +2,15 @@
 
 
 const params = new URLSearchParams(window.location.search);
+
 const movieBanner = params.get('banner');
 const movieTitle = params.get('title');
 const video = params.get('video');
 const overview = params.get('overview');
 const tagline =  params.get('tagline');
 const vote =  params.get('vote');
-
-
+const cast_object = params.get('cast');
 const movieContainer = document.getElementById('contenedor-principal');
-
-
 
 movieContainer.innerHTML = `
 <section class = "flex" id="section_1">  
@@ -25,13 +23,13 @@ movieContainer.innerHTML = `
       <span class = "titulo">${vote}</span>
       <article class = "flex" id = "banner_content">
 
-      <img src="./Media/icons8-coin-96.png"/ alt="${movieTitle} image principal">
+      <img src="./Media/icons8-coin-96.png"/ alt="Coin Icon Image.">
       
       </article>
     </div>
   </div>
   <div class = "flex" id = "mainMedia_box_container">
-    <img id = "movie-banner" src=${movieBanner}>
+    <img id = "movie-banner" src=${movieBanner} alt="Banner of a movie">
   </div>
 </section>
 
@@ -44,9 +42,10 @@ movieContainer.innerHTML = `
   <iframe width="560" height="315" src="https://www.youtube.com/embed/${video}" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
   </div>
 </section>
+<section class = "flex" id = "section_3">
+  <h1 class="titulo"> CAST </h1>
+  <div class="perfil_zone flex">
+  ${cast_object.length > 0 ? cast_object : 'DONT GET CAST, SORRY :[' }
+  </div>
+</section>
 `;
-
-
-
-// https://secure.gravatar.com/avatar/992eef352126a53d7e141bf9e8707576.jpg
-
