@@ -35,10 +35,10 @@ export function indexGen(data) {
             peliculas.backdrop_path != undefined
         ) {
             pelicula += `
-            <div class='pelicula'>
+            <figure class='pelicula'>
                 <img class='poster' src='${poster_url}${peliculas.poster_path}' id='${peliculas.id}'/>
                 <h3 class='titulo'>${peliculas.title}</h3>
-            </div>
+            </figure>
         `;
         }
     });
