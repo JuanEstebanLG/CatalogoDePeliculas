@@ -14,6 +14,7 @@ let searchBar = document.querySelector('input');
 let statusItems = 'popular';
 
 // this elements may change the movies order when click over they.
+
 const popular = document.getElementById('popular');
 const rated = document.getElementById('rated');
 const upcoming = document.getElementById('upcoming');

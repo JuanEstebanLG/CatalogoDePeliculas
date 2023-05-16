@@ -56,6 +56,9 @@ header nav{
 	border: none;
 }
 
+
+
+
 .remove{
 	display: none;
 }
@@ -92,6 +95,10 @@ header nav{
 	text-align:center;
 }
 
+
+.menu{
+	display: none;
+}
 
 .buttons{
 	display: flex;
@@ -176,7 +183,7 @@ header nav{
 
 .poster:hover{
     transform: scale(1.04);
-    opacity: .8;
+    filter: contrast(110%);
     box-shadow: 5px 5px 10px 2px black;
 	cursor: pointer;
 }
