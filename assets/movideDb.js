@@ -2,7 +2,7 @@
 
 export const url_basic = 'https://api.themoviedb.org/3/';
 export const api_key = '7073007d70c81551b5e373ca85df0495';
-export const language = 'en-US'
+export const language = 'es-SP'
 
 
 

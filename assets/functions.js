@@ -348,6 +348,8 @@ export function detectMenu(menu, peliculasContainer, page) {
     }
 }
 
+
+
 export async function searchMovie(texto) {
     if (texto != "") {
         const search_fetch = await request.movieSearchFetch(texto);

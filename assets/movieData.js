@@ -40,7 +40,7 @@ movieContainer.innerHTML = `
   </div>
 
   <div id ="trailer_container" class = "flex">
-  <iframe  src="https://autoembed.to/movie/tmdb/${id}" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+  <iframe  src="https://youtube.com/embed/${video}" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
   </div>
 </section>
 <section class = "flex" id = "section_3">
