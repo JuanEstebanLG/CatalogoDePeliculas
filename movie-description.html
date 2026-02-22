@@ -1,26 +1,25 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
 <head>
-    <title>Descripcion.</title>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="./Style/movie-description.css">
-    <link rel="stylesheet" href="./Style/descriptionMovile.css" media="screen and (min-width: 350px) and (max-width: 900px)">
+    <meta name="description" content="Detalle de pelicula con trailer, sinopsis y reparto.">
+    <title>Ficha | Cartelera Atlas</title>
 
-    <!-- FONTS -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Antonio:wght@100&display=swap" rel="stylesheet">
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Comic+Neue&display=swap" rel="stylesheet">
-   
+    <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Instrument+Sans:wght@400;600;700&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" href="./Style/movie-description.css?v=2.0">
+    <script src="./assets/movieData.js?v=2.0" defer></script>
 </head>
 <body>
-    <main class="contenedor-principal" id="contenedor-principal">
+    <div class="bg-haze" aria-hidden="true"></div>
+    <div class="bg-grid" aria-hidden="true"></div>
+
+    <main class="page-shell">
+        <section class="contenedor-principal" id="contenedor-principal" aria-live="polite"></section>
     </main>
 </body>
-<!-- SCRIPT --> 
-<script src="./assets/movieData.js" defer></script>
 </html>

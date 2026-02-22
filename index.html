@@ -1,38 +1,58 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <!-- Fonts -->
+    <meta name="description" content="Catalogo cinematografico con estrenos, populares y top rated.">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Sigmar&display=swap" rel="stylesheet">
-    <!-- Script and Style -->
-    <link rel="stylesheet" href="./Style/estilos.css?v=1.0">
-    <link rel="stylesheet" href="./Style/headerSmall.css?v=1.0" media="screen and (min-width: 350px) and (max-width: 900px)" >
-    <!-- Title -->
-    <script src="./assets/index.js?v=1.0" defer  type="module"></script>
-    <title>CATALOGE</title>
+    <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Instrument+Sans:wght@400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="./Style/estilos.css?v=2.0">
+    <script src="./assets/index.js?v=2.0" defer type="module"></script>
+    <title>Cartelera Atlas</title>
 </head>
 <body>
-    <header>
-        <nav>
-            <input type="text" name="search-bar" id="search-bar" placeholder="¿Buscas una Pelicula?" autocomplete="off">
-            <section class="buttons">
-                <button class="button-sections" id="popular">Popular</button>
-                <button class="button-sections" id="rated">Rated</button>
-                <button class="button-sections" id="upcoming">Upcoming</button>
+    <div class="bg-aurora" aria-hidden="true"></div>
+    <div class="bg-grain" aria-hidden="true"></div>
+
+    <header class="hero-header">
+        <section class="brand">
+            <p class="brand-kicker">Curated Movie Atlas</p>
+            <h1>Cartelera Atlas</h1>
+            <p class="brand-copy">
+                Un catalogo visual de peliculas para explorar por pulso del momento,
+                no por algoritmos aburridos.
+            </p>
+        </section>
+
+        <nav class="control-panel" aria-label="Controles del catalogo">
+            <label class="search-wrap" for="search-bar">
+                <span class="search-label">Buscar titulo</span>
+                <input type="text" name="search-bar" id="search-bar" placeholder="Ej: Parasite, Dune, Whiplash..." autocomplete="off">
+            </label>
+
+            <section class="buttons" aria-label="Filtros de categoria">
+                <button class="button-sections is-active" id="popular" type="button">Popular</button>
+                <button class="button-sections" id="rated" type="button">Top Rated</button>
+                <button class="button-sections" id="upcoming" type="button">Upcoming</button>
             </section>
         </nav>
     </header>
-    <main class="contenedor" id="contenedor">
 
-        
+    <main>
+        <section class="grid-shell">
+            <div class="grid-headline">
+                <h2>Seleccion en Pantalla</h2>
+                <p>Haz clic en cualquier poster para abrir su ficha completa.</p>
+            </div>
+            <section class="contenedor" id="contenedor" aria-live="polite"></section>
+        </section>
     </main>
+
     <div class="paginacion">
-        <button id="btnAnterior">Anterior</button>
-        <button id="btnSiguiente">Siguiente</button>
+        <button id="btnAnterior" type="button">Anterior</button>
+        <button id="btnSiguiente" type="button">Siguiente</button>
     </div>
 </body>
 </html>

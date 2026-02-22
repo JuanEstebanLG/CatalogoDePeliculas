@@ -1,4 +1,3 @@
-import { movieDbFetch, url_basic, api_key, language } from "./movideDb.js";
 import { cargarPeliculas, peliculasContainer, request } from "./index.js";
 
 const poster_url = "https://image.tmdb.org/t/p/w500/"; // prefix for any img catch from api.
@@ -14,11 +13,16 @@ export async function changeState(mode, page, peliculasContainers, section) {
         let end = section;
         let response = await mode(page, end);
         let data = await Validate(response);
+        if (!data || !Array.isArray(data.results)) {
+            peliculasContainers.innerHTML = "";
+            return peliculasContainers;
+        }
         let peliculaHtml = indexGen(data);
         peliculasContainers.innerHTML = peliculaHtml;
         return peliculasContainers;
     } catch (error) {
         console.log(error);
+        return peliculasContainers;
     }
 }
 
@@ -30,10 +34,7 @@ export async function changeState(mode, page, peliculasContainers, section) {
 export function indexGen(data) {
     let pelicula = "";
     data.results.forEach((peliculas) => {
-        if (
-            peliculas.backdrop_path != null ||
-            peliculas.backdrop_path != undefined
-        ) {
+        if (peliculas.poster_path != null && peliculas.poster_path != undefined) {
             pelicula += `
             <figure class='pelicula'>
                 <img class='poster' src='${poster_url}${peliculas.poster_path}' id='${peliculas.id}'/>
@@ -60,12 +61,9 @@ export function indexVideo(data) {
 
 export function indexDetails(data) {
     if (Array.isArray(data)) {
-        let arrayDetails = "";
-        for (let i = 0; i < data.genre.length; i++) {
-            arrayDetails += `,${data.genre[i]}`;
-        }
-        return arrayDetails;
+        return data.map((genre) => genre.name).join(", ");
     }
+    return "";
 }
 
 /*
@@ -228,7 +226,7 @@ export function extendCast(cast) {
  */
 
 export async function Validate(dataFetch) {
-    let response = "";
+    let response = null;
     if (dataFetch.ok) {
         response = dataFetch.json();
     } else {
@@ -354,9 +352,13 @@ export async function searchMovie(texto) {
     if (texto != "") {
         const search_fetch = await request.movieSearchFetch(texto);
         const data_search = await Validate(search_fetch);
+        if (!data_search || !Array.isArray(data_search.results)) {
+            peliculasContainer.innerHTML = "";
+            return;
+        }
         let NEW_GENERATION_MOVIES = "";
         data_search.results.forEach((search) => {
-            if (search.poster_path != null && search.video != null) {
+            if (search.poster_path != null) {
                 NEW_GENERATION_MOVIES += `
             <div class='pelicula'>
                 <img class='poster' src='${poster_url}${search.poster_path}' id='${search.id}'/>
