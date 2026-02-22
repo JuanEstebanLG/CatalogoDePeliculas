@@ -1,19 +1,33 @@
-# CatalogoDePeliculas
-Movie catalog powered by TMDB API with sections: Popular, Top Rated, and Upcoming.
+# Cartelera Atlas
 
-## Secure API key setup
-1. Create `.env` in project root.
-2. Add:
+Un catalogo de peliculas pensado para explorar, descubrir y elegir mejor que ver.
 
-```env
-TMDB_API_KEY=your_tmdb_api_key_here
-PORT=3000
-```
+## Lo que ofrecemos
 
-3. Start the app:
+- 🎬 **Catalogo visual de peliculas**  
+  Explora titulos de forma rapida con una interfaz clara y centrada en posters.
 
-```bash
-npm start
-```
+- 🧭 **Filtros por seccion**  
+  Cambia entre categorias como **Popular**, **Top Rated** y **Upcoming** para ver distintos grupos de peliculas.
 
-The frontend now calls `/api/tmdb/*` and the server injects the private TMDB key from `.env`.
+- 🔎 **Busqueda por titulo**  
+  Encuentra peliculas escribiendo su nombre y obten resultados al instante.
+
+- 📄 **Ficha de cada pelicula**  
+  Al abrir una pelicula puedes ver su informacion principal, trailer, puntuacion y reparto (cuando esta disponible).
+
+- 📱 **Experiencia adaptable**  
+  La interfaz se adapta a escritorio y movil para mantener una navegacion comoda en cualquier pantalla.
+
+## Enfoque de la experiencia
+
+Cartelera Atlas prioriza:
+
+- Exploracion rapida
+- Lectura clara de informacion
+- Navegacion fluida entre listado y detalle
+
+## Configuracion de entorno
+
+Incluimos un archivo `.env.example` como guia de configuracion base.  
+Puedes usarlo como referencia para crear tu archivo `.env` local con los valores necesarios.
