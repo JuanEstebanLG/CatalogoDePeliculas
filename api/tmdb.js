@@ -4,7 +4,7 @@ export default async function handler(req, res) {
         return res.status(500).json({ error: "Missing TMDB_API_KEY" });
     }
 
-    const rawPath = req.query.path || [];
+    const rawPath = req.query.path || "";
     const tmdbPath = Array.isArray(rawPath) ? rawPath.join("/") : String(rawPath);
     if (!tmdbPath) {
         return res.status(400).json({ error: "Missing TMDB path" });
